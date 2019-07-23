@@ -34,7 +34,7 @@ export class CustomTableComponent implements OnInit {
   }
 
   setupTableConfig() {
-    console.log(this.pageSize);
+    this.pageSize = typeof this.pageSize === 'string' ? parseInt(this.pageSize) : this.pageSize;
     const pageStartIndex = this.pageIndex * this.pageSize;
     const pageEndIndex = pageStartIndex + this.pageSize;
     this.currentPageData = this.tableData.slice(pageStartIndex, pageEndIndex);
@@ -48,6 +48,12 @@ export class CustomTableComponent implements OnInit {
   }
 
   changePageSize() {
+    this.pageIndex = 0;
+    this.setupTableConfig();
+  }
+
+  goToPage(pageNum: number) {
+    this.pageIndex = pageNum - 1;
     this.setupTableConfig();
   }
 

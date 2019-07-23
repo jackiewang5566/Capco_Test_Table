@@ -1,5 +1,5 @@
 <div class="pagination">
-    <a href="#">&laquo;</a>
-    <a href="#" *ngFor="let page of pages" (click)="goToPage()">{{ page }}</a>
-    <a href="#">&raquo;</a>
+    <a (click)="goToPage(crtPage, true, false)">&laquo;</a>
+    <a *ngFor="let page of pages" (click)="goToPage(page)" [ngClass]="{active: page === crtPage }">{{ page }}</a>
+    <a (click)="goToPage(crtPage, false, true)">&raquo;</a>
 </div>

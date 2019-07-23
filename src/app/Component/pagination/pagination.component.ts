@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Data } from 'src/app/data-structure/data';
 
 @Component({
@@ -7,18 +7,21 @@ import { Data } from 'src/app/data-structure/data';
   styleUrls: ['./pagination.component.sass']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input('tableData') tableData: Data[] = [];
+  // @Input('tableData') tableData: Data[] = [];  
   @Input('totalPages') totalPages: number = 0;
+  @Output('gotoPage') loadPage = new EventEmitter();
   pages: number[];
+  crtPage: number = 1;
 
   constructor() { }
 
-  ngOnChanges() {    
-    console.log(this.totalPages);
+  ngOnChanges() {
+    let pageCount = this.totalPages;  
     if (this.totalPages > 0) {
       let index = 1;
       this.pages = [];
-      while (this.totalPages-- > 0) {
+      this.crtPage = 1;
+      while (pageCount-- > 0) {
         this.pages.push(index++);
       }
     }
@@ -27,7 +30,16 @@ export class PaginationComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  goToPage() {
+  goToPage(page, previousFlag: boolean = false, nextFlag: boolean = false): void {
+    this.crtPage = page;
+    console.log(this.crtPage)
+    if (previousFlag) {
+      this.crtPage = this.crtPage > 1 ? --this.crtPage : this.crtPage;
+    }
 
+    if (nextFlag) {
+      this.crtPage = this.crtPage < this.totalPages ? ++this.crtPage : this.crtPage;
+    }
+    this.loadPage.emit(this.crtPage);
   }
 }

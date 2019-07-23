@@ -20,10 +20,8 @@
         <td *ngFor="let col of tableHeaderTitle">{{ row[col] }}</td>
       </tr>
     </tbody>
-    <tfoot>
-        <app-pagination [tableData]="tableData" [totalPages]="totalPages"></app-pagination>
-    </tfoot>
   </table>
+  <app-pagination [totalPages]="totalPages" (gotoPage)="goToPage($event)"></app-pagination>
 </div>
 <ng-template #placeholder>
   <p>
