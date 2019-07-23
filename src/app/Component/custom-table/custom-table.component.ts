@@ -38,7 +38,7 @@ export class CustomTableComponent implements OnInit {
     const pageStartIndex = this.pageIndex * this.pageSize;
     const pageEndIndex = pageStartIndex + this.pageSize;
     this.currentPageData = this.tableData.slice(pageStartIndex, pageEndIndex);
-    this.totalPages = this.tableData.length / this.pageSize + this.tableData.length % this.pageSize !== 0 ? 1 : 0;
+    this.totalPages = Math.ceil(this.tableData.length / this.pageSize);
 
     if (this.tableData.length > 0 && this.tableHeaderTitle.length === 0) {
       Object.keys(this.tableData[0]).forEach((headerTitle) => {

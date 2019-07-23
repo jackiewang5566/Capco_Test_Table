@@ -13,7 +13,8 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnChanges() {
+  ngOnChanges() {    
+    console.log(this.totalPages);
     if (this.totalPages > 0) {
       let index = 1;
       this.pages = [];
