@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { Data } from 'src/app/data-structure/data';
 
 @Component({
   selector: 'app-pagination',
@@ -7,7 +6,6 @@ import { Data } from 'src/app/data-structure/data';
   styleUrls: ['./pagination.component.sass']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  // @Input('tableData') tableData: Data[] = [];  
   @Input('totalPages') totalPages: number = 0;
   @Output('gotoPage') loadPage = new EventEmitter();
   pages: number[];
@@ -32,7 +30,6 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   goToPage(page, previousFlag: boolean = false, nextFlag: boolean = false): void {
     this.crtPage = page;
-    console.log(this.crtPage)
     if (previousFlag) {
       this.crtPage = this.crtPage > 1 ? --this.crtPage : this.crtPage;
     }

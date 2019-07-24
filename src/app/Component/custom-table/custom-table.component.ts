@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Data } from 'src/app/data-structure/data';
 import { DataService } from 'src/app/Service/data.service';
+import { Data } from 'src/app/data-structure/data';
+import { SubmitParams } from 'src/app/data-structure/submit-params';
 
 @Component({
   selector: 'app-custom-table',
@@ -59,7 +60,7 @@ export class CustomTableComponent implements OnInit {
   }
 
   submit(row: Data) {
-    const params = {
+    const params: SubmitParams = {
       id: row.id,
       status: row.status
     };

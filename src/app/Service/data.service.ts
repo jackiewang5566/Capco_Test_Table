@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Data } from '../data-structure/data';
+import { SubmitParams } from 'src/app/data-structure/submit-params';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +21,15 @@ export class DataService {
     return this._dataSource.asObservable();
   }
 
-  postData(params): Observable<any> {
+  postData(params: SubmitParams): Observable<any> {
     return this.http.post('/api/submit', JSON.stringify(params))
                     .pipe(
                       catchError(this.handleError)
                     );
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): Observable<any> {
     console.log('An error occured', error);
-    return Promise.reject(error);
+    return Observable.throw(error.message || error);
   }
 }

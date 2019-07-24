@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomTableComponent } from './custom-table.component';
+import { FormsModule } from '@angular/forms';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { DataService } from 'src/app/Service/data.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('CustomTableComponent', () => {
   let component: CustomTableComponent;
@@ -8,7 +12,18 @@ describe('CustomTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomTableComponent ]
+      declarations: [ 
+        CustomTableComponent, 
+        PaginationComponent 
+      ],
+      imports: [
+        FormsModule
+      ],
+      providers: [
+        DataService,
+        HttpClient,
+        HttpHandler
+      ]
     })
     .compileComponents();
   }));
