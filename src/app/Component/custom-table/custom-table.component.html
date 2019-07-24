@@ -3,24 +3,30 @@
   <select name="pageSize" id="pageSize"
         [(ngModel)]="pageSize"
         (ngModelChange)="changePageSize()">
-    <option value="" disabled selected>Please select page size....</option>
-    <option value="{{ps}}" *ngFor="let ps of pageSizeOptions">
-      {{ ps }}
-    </option>
+    <option value="{{ps}}" *ngFor="let ps of pageSizeOptions">{{ ps }}</option>
   </select>
 
-  <table class="fixed_header">
-    <thead>
-      <tr>
-        <th *ngFor="let header of tableHeaderTitle">{{ header }}</th>
-      </tr>  
-    </thead>  
-    <tbody>
-      <tr *ngFor="let row of currentPageData">
-        <td *ngFor="let col of tableHeaderTitle">{{ row[col] }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="theader-container" #tHeaderDiv>
+    <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th *ngFor="let header of tableHeaderTitle">{{ header }}</th>
+          </tr>  
+        </thead> 
+    </table>
+  </div>
+
+  <div class="tbody-container" (scroll)="scrollTBody($event)">
+    <table>     
+      <tbody>
+        <tr *ngFor="let row of currentPageData">
+          <td><button (click)="submit(row)">submit</button></td>
+          <td *ngFor="let col of tableHeaderTitle">{{ row[col] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <app-pagination [totalPages]="totalPages" (gotoPage)="goToPage($event)"></app-pagination>
 </div>
 <ng-template #placeholder>

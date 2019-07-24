@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Data } from 'src/app/data-structure/data';
 import { DataService } from 'src/app/Service/data.service';
 
@@ -8,6 +8,7 @@ import { DataService } from 'src/app/Service/data.service';
   styleUrls: ['./custom-table.component.sass']
 })
 export class CustomTableComponent implements OnInit {
+  @ViewChild('tHeaderDiv') thead: ElementRef;
   tableData: Data[] = [];
   currentPageData: Data[] = [];
 
@@ -55,6 +56,24 @@ export class CustomTableComponent implements OnInit {
   goToPage(pageNum: number) {
     this.pageIndex = pageNum - 1;
     this.setupTableConfig();
+  }
+
+  submit(row: Data) {
+    const params = {
+      id: row.id,
+      status: row.status
+    };
+    this.dataService.postData(params).subscribe((res) => {
+      alert(`${res['msg']}, id: ${row.id}, status: ${row.status}`);
+    });
+  }
+
+  /**
+   * syncing thead and tbody when horizontally scroll
+   */
+  scrollTBody(e) {
+    let leftOffset = e.target.scrollLeft;
+    this.thead.nativeElement.scrollLeft = leftOffset;
   }
 
 }
