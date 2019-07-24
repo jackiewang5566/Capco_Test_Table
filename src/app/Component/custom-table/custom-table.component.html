@@ -27,7 +27,7 @@
       </tbody>
     </table>
   </div>
-  <app-pagination [totalPages]="totalPages" (gotoPage)="goToPage($event)"></app-pagination>
+  <app-pagination [totalPages]="totalPages" (loadPage)="goToPage($event)"></app-pagination>
 </div>
 <ng-template #placeholder>
   <p>

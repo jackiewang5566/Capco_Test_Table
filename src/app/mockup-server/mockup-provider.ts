@@ -27,4 +27,4 @@ export let MockBackendProvider = {
     provide: HTTP_INTERCEPTORS,
     useClass: MockupBackendInterceptor,
     multi: true
-}
+};

@@ -6,15 +6,15 @@ import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angu
   styleUrls: ['./pagination.component.sass']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input('totalPages') totalPages: number = 0;
-  @Output('gotoPage') loadPage = new EventEmitter();
+  @Input() totalPages = 0;
+  @Output() loadPage = new EventEmitter();
   pages: number[];
-  crtPage: number = 1;
+  crtPage = 1;
 
   constructor() { }
 
   ngOnChanges() {
-    let pageCount = this.totalPages;  
+    let pageCount = this.totalPages;
     if (this.totalPages > 0) {
       let index = 1;
       this.pages = [];

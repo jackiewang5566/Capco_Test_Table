@@ -12,9 +12,9 @@ describe('CustomTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-        CustomTableComponent, 
-        PaginationComponent 
+      declarations: [
+        CustomTableComponent,
+        PaginationComponent
       ],
       imports: [
         FormsModule

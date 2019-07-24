@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Data } from '../data-structure/data';
 import { SubmitParams } from 'src/app/data-structure/submit-params';
@@ -30,6 +30,6 @@ export class DataService {
 
   private handleError(error: any): Observable<any> {
     console.log('An error occured', error);
-    return Observable.throw(error.message || error);
+    return throwError(error.message || error);
   }
 }

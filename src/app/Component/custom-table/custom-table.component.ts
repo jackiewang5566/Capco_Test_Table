@@ -16,11 +16,11 @@ export class CustomTableComponent implements OnInit {
   // table header
   tableHeaderTitle: string[] = [];
 
-  // table page 
-  pageIndex: number = 0;
-  pageSize: number = 10;
+  // table page
+  pageIndex = 0;
+  pageSize = 10;
   pageSizeOptions: Array<number> = [5, 10, 15, 20, 25, 50, 100];
-  totalPages: number = 0;
+  totalPages = 0;
 
   constructor(private dataService: DataService) { }
 
@@ -36,7 +36,7 @@ export class CustomTableComponent implements OnInit {
   }
 
   setupTableConfig() {
-    this.pageSize = typeof this.pageSize === 'string' ? parseInt(this.pageSize) : this.pageSize;
+    this.pageSize = typeof this.pageSize === 'string' ? parseInt(this.pageSize, 10) : this.pageSize;
     const pageStartIndex = this.pageIndex * this.pageSize;
     const pageEndIndex = pageStartIndex + this.pageSize;
     this.currentPageData = this.tableData.slice(pageStartIndex, pageEndIndex);
@@ -45,8 +45,8 @@ export class CustomTableComponent implements OnInit {
     if (this.tableData.length > 0 && this.tableHeaderTitle.length === 0) {
       Object.keys(this.tableData[0]).forEach((headerTitle) => {
         this.tableHeaderTitle.push(headerTitle);
-      })
-    } 
+      });
+    }
   }
 
   changePageSize() {
@@ -73,7 +73,7 @@ export class CustomTableComponent implements OnInit {
    * syncing thead and tbody when horizontally scroll
    */
   scrollTBody(e) {
-    let leftOffset = e.target.scrollLeft;
+    const leftOffset = e.target.scrollLeft;
     this.thead.nativeElement.scrollLeft = leftOffset;
   }
 
