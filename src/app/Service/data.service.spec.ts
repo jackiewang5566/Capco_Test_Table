@@ -72,16 +72,6 @@ describe('DataService', () => {
       expect(req.request.method).toEqual('GET');
       req.flush(mockData);
   }));
-
-  it('should make post request', inject([HttpTestingController, DataService], (httpMock: HttpTestingController,
-    dataService: DataService) => {
-      const mockData: SubmitParams = { id: 1, status: 'expire' };
-      
-      dataService.postData(mockData);
-      const req = httpMock.expectOne('/api/submit');
-      expect(req.request.method).toEqual('POST');
-      req.flush(mockData);
-  }));
   
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     httpMock.verify();
